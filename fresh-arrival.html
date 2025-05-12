@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fresh arrival</title>
+    <style>
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+.header{
+    z-index: 999;
+    position: sticky;
+}
+.nav-bar{
+    height: 80px;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    margin-top: 0px;
+    z-index: 1000;
+}
+.nav-logo{
+    height: 38px;
+    width: 50%;
+    cursor: pointer;
+}
+.logo{
+    background-image: url("assets/logo_icon.svg");
+    background-size: cover;
+    height: 38px;
+    width: 50px;
+    margin-left: 30px;
+}
+.other-links{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+    font-size: 17px;
+    font-weight: bold;
+}
+.other-links a:hover{
+    color: crimson;
+}
+.other-links a{
+    text-decoration: none;
+    color: #000;
+}
+#cart-icon{
+    font-size: 30px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+}
+#cart-icon .cart-item-count{
+    position: absolute;
+    top: 0;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    background-color: #e35f26;
+    border-radius: 50%;
+    font-size: 12px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+/** cart **/
+.cart{
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    padding: 65px 20px 40px;
+    z-index: 100;
+    overflow: auto;
+    transition: 0.5s;
+}
+.cart.active{
+    right: 0;
+}
+.cart-title{
+    text-align: center;
+    font: 30px;
+}
+.cart-box{
+    display: flex;
+    align-items:center;
+    margin-top: 20px;
+}
+
+.cart-box img{
+    width: 100px;
+    height: 100px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.cart-details{
+    display: grid;
+    gap: 8px;
+    margin-right: auto;
+}
+.cart-product-title{
+    font-size: 16px;
+    line-height: 1;
+}
+.cart-price{
+    font-weight: 500;
+}
+
+.cart-quantity{
+    display: flex;
+    width: 100px;
+    border: 1px solid #999;
+    border-radius: 6px;
+}
+
+.cart-quantity button{
+    background: transparent;
+    width: 30px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.cart-quantity #decrement{
+    color: #999;
+}
+.cart-quantity .number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    cursor: default;
+}
+
+.cart-remove{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.total{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    font-size: 18px;
+}
+.total-price{
+    margin-left: 10px;
+    font-weight: 600;
+}
+.btn-buy{
+    display: block;
+    padding: 10px 30px;
+    background-color: #e35f26;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #fff;
+    margin: 20px auto 0;
+    cursor: pointer;
+}
+#cart-close{
+    position: absolute;
+    top:20px;
+    right: 15px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+
+/** banner **/
+
+
+.banner{
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+}
+.banner-img{
+    margin-top: 100px;
+    height: 380px;
+    width: 90%;
+    border-radius: 20px;
+    background-image: url("assets/fresh-arrival.webp");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+.msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+/** season picks **/
+.container2 {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.card2 {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 290px;
+    text-align: center;
+    transition: 0.5s;
+    z-index: 1;
+}
+.card2:hover{
+    transform: scale(1.03);
+    z-index: 2;
+}
+.card2 img {
+    width: 100%;
+    height: auto;
+}
+.card-content {
+    padding: 15px;
+}
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.price {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+span{
+    color: #2E953E;;
+}
+.price del{
+    color: #8F9397; 
+    font-size: 12px;
+}
+
+.products{
+    margin-top: 20px;
+    display: block;
+    background: #F0F0F0;
+    color: crimson;
+    padding: 15px;
+    margin: 10px auto;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid crimson;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+.products:hover{
+    color: white;
+    background-color: crimson;
+}
+
+/**store **/
+
+.wrogn-store{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 360px;
+    width: 100%;
+    gap: 20px;
+}
+
+.wrogn-store-content{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-left: 150px;
+    margin-right: -50px;
+}
+.wrogn-store-content p{
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: -20px;
+}
+.wrogn-store-content h2{
+    font-size: 56px;
+    font-weight: bold;
+}
+.wrogn-store-content h3{
+    font-size: 18px;
+    color: #565A62;
+    margin-top: -20px;
+}
+.store{
+    cursor: pointer;
+    background: black;
+    color: #fff;
+    padding: 18px;
+    width: 260px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    height: 70px;
+    border: 2px solid black;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 19px;
+}
+.wrogn-store-img{
+    width: 50%;
+}
+.wrogn-store-img img{
+    height: 340px;
+    width: 620px;
+    background-size: cover;
+    margin-left: -40px;
+    border-radius: 22px;
+    border: 1px solid black;
+}
+
+/** wrogn stores **/
+
+.stores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100%;
+}
+
+.store-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+}
+.big{
+    width: 50%;
+}
+.big img{
+    height: 375px;
+    width: 600px;
+    background-size: cover;
+    border-radius: 22px;
+    border: 1px solid black;
+    margin-left:80px;
+}
+.small{
+    width: 50%;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+}
+.small img{
+    height: 375px;
+    width: 285px;
+    background-size: cover;
+    border-radius: 22px;
+    border: 1px solid black;
+}
+
+/** footer **/
+.footpanel-1{
+    height: 90px;
+    width: 100%;
+}
+.footpanel-1 img{
+    border-radius: 22px;
+    height: 120px;
+    width: 100%;
+}
+
+.footpanel-2{
+    width: 100%;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    background-color: #070707;
+}
+
+.left-panel{
+    width: 35%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 80px;
+}
+.left-panel img{
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+.left-panel h1{
+    color: #A5A8AC;
+    font-size: 46px;
+}
+.left-panel p{
+    color: #A5A8AC;
+    font-size: 18px;
+}
+.socialmedia-logo img{
+    height: 44px;
+    width: 35px;
+}
+
+.right-panel{
+    width: 65%;
+    color: #A5A8AC;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+.right-panel p:hover{
+    text-decoration: underline;
+    color: #fff;
+}
+.right-panel .p1{
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 18px;
+}
+
+
+
+    </style>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="nav-logo border">
+                <div class="logo"></div>
+            </div>
+            <div class="other-links">
+                <a href="index.html">Home</a>
+                <a href="shop-page.html">Shop</a>
+                <a href="fresh-arrival.html">New Arrivals</a>
+                <a>About</a>
+                <a>Contact us</a>
+            </div>
+            
+        </div>
+    </header>
+
+    
+    <div class="cart">
+        <h2 class="cart-title">Your Cart</h2>
+        <div class="cart-content">
+          <!--  <div class="cart-box">
+                <img src="assets/season-top-picks1.webp" class="cart-image">
+                <div class="cart-details">
+                    <h2 class="cart-product-title">Abstract Art Back Print T-Shirt</h2>
+                    <p class="price">₹1119 <del>₹1399</del> <span>(20% OFF)</span></p>
+                    <div class="cart-quantity">
+                        <button id="decrement">-</button>
+                        <span class="number">1</span>
+                        <button id="increment">+</button>
+                    </div>
+                </div>
+                <i class="fa-solid fa-trash-can cart-remove"></i>
+            </div>  -->
+        </div>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">₹0</div>
+        </div>
+        <button class="btn-buy">Buy Now</button>
+        <i class="fa-solid fa-xmark" id="cart-close"></i>
+    </div>
+
+    <div class="banner">
+        <div class="banner-img"></div>
+    </div>
+    <div class="msg">
+        <h2>Fresh Arrvial</h2>
+    </div>
+
+    <div class="container2">
+        <div class="card2">
+            <img src="assets/season-top-picks1.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Abstract Art Back Print T-Shirt</p>
+                <p class="price">₹1119 <del>₹1399</del> <span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks2.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Abstract Art Back Print T-Shirt....</p>
+                <p class="price">₹1119 <del>₹1399</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks3.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Look Abstract Back Print T-....</p>
+                <p class="price">₹1119 <del>₹1399</del><span>(20% OFF)</span</p>
+              
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks4.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Look Abstract Off White T-Shirt...</p>
+                <p class="price">₹1119 <del>₹1399</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks5.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Wrogn Graphic Logo Printed T...</p>
+                <p class="price">₹719 <del>₹899</del> <span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks6.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Navy Blue Checkered Slim Fit...</p>
+                <p class="price">₹2079 <del>₹2599</del> <span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+
+        <div class="card2">
+            <img src="assets/season-top-picks7.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Grey Patterns Viscose Shirt</p>
+                <p class="price">₹1599 <del>₹1999</del> <span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+
+        <div class="card2">
+            <img src="assets/season-top-picks8.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Ribbed Texture Pink Polo T-Shirt</p>
+                <p class="price">₹1119 <del>₹1599</del> <span>(30% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks9.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Short Sleeve Printed Cuban...</p>
+                <p class="price">₹1,429  <del>₹2199</del> <span>(30% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/season-top-picks10.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title2">Printed Cotton Blend Polo T-Shirt</p>
+                <p class="price">₹1,049  <del>₹1499</del> <span>(30% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/Virat2.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Next Level Pure Cotton T-Shirt</p>
+                <p class="price">₹719 <del>₹899</del><span>(20% OFF)</span></p> 
+            </div>
+        </div>
+        <div class="card2">
+            <img src="assets/Virat1.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Picasso Gone Wrogn Back...</p>
+                <p class="price">₹1,119 <del>₹1,399</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+        <div class="card2">
+            <img src="assets/Virat3.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Wrogn Day Printed T-Shirt in...</p>
+                <p class="price">₹959 <del>₹1,199</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+        <div class="card2">
+            <img src="assets/Virat4.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Storm Black Hooded Jacket</p>
+                <p class="price">₹3,249 <del>₹4,999</del><span>(35% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/Virat5.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Striped Black Comfort Fit Shirt</p>
+                <p class="price">₹1759 <del>₹2100</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+
+        <div class="card2">
+            <img src="assets/virat6.webp" alt="T-Shirt 1">
+            <div class="card-content">
+                <p class="card-title">Abstract Checks Red AOP Shirt</p>
+                <p class="price">₹1759 <del>₹2199</del><span>(20% OFF)</span></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="products">View All Products <i class="fa-solid fa-arrow-right"></i></a>
+
+    <div class="wrogn-store">
+        <div class="wrogn-store-content">
+            <p>WROGN STORE.<p>
+            <h2>RIGHT PLACE.</h2>
+            <h3>Find how close You're to going <br>wrogn!</h3>
+            <button class="store">See All Stores</button>
+        </div>
+        <div class="wrogn-store-img">
+            <img src="assets/store1.webp" alt="">
+        </div>
+    </div>
+
+    <div class="stores">
+        <div class="store-image">
+            <div class="big">
+                <img src="assets/store2.webp" alt="">
+            </div>
+            <div class="small">
+                <img src="assets/store3.webp" alt="" >
+                <img src="assets/store4.webp" alt="" >
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footpanel-1">
+            <img src="assets/footer.svg" alt="">
+        </div>
+
+        <div class="footpanel-2">
+            <div class="left-panel">
+                <img src="assets/footer-logo-wrogn.webp" alt="">
+                <h1>For The <br> Right <br>Kind Of Man.</h1>
+                <p>© 2024, Wrogn Powered by TMRW</p>
+                <div class="socialmedia-logo">
+                    <img src="assets/Instagram.svg" alt="">
+                    <img src="assets/Facebook.svg" alt="">
+                    <img src="assets/Twitter.png" alt="">
+                    <img src="assets/Pinterest.svg" alt="">
+                    <img src="assets/Youtube.png" alt="">
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="left-panel2">
+                    <h2 class="p1">HELP</h2>
+                    <P>My Account</P>
+                    <p>Privacy Policy</p>
+                    <p>Anti Corruption Policy</p>
+                    <p>Terms & Conditions</p>
+                    <p>Contact Us</p>
+                </div>
+    
+                <div class="right-panel1">
+                    <h2 class="p1">ORDER SUPPORT</h2>
+                    <P>Return & Refund Policy</P>
+                    <p>FAQ</p>
+                    <p>Shipping Policy</p>
+                    <p>Cancellation</p>
+                </div>
+    
+                <div class="right-panel2">
+                    <h2 class="p1">ABOUT US</h2>
+                    <p>About Us</p>
+                    <p>Find a Store</p>
+                    <p>Blog</p>
+                    <p>Careers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
